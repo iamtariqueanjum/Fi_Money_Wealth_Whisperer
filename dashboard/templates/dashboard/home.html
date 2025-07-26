@@ -103,13 +103,19 @@
             </form>
         </div>
         <div class="tabs">
-            <button class="tab">Account Balance</button>
+            <button class="tab">Your networth</button>
             <button class="tab">Current Goals</button>
             <button class="tab">Recent Transactions</button>
         </div>
         <div class="tab-content">
             <h3>Account Balance</h3>
-            <p>Your account balance will be shown here.</p>
+            {% if net_worth %}
+                <p>Your current net worth: <strong>₹{{ net_worth }}</strong></p>
+            {% elif net_worth_error %}
+                <p style="color:#e53e3e;">{{ net_worth_error }}</p>
+            {% else %}
+                <p>Loading...</p>
+            {% endif %}
         </div>
         <div class="tab-content">
             <h3>Current Goals</h3>
