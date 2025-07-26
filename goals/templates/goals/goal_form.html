@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if goal %}Edit{% else %}Add{% endif %} Goal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f8fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            padding: 32px 40px 40px 40px;
+        }
+        h2 {
+            margin-top: 0;
+            color: #2d3748;
+        }
+        label {
+            display: block;
+            margin-top: 18px;
+            color: #20d4aa;
+            font-weight: 600;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #20d4aa;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-top: 6px;
+            background: #f7f8fa;
+            margin-bottom: 8px;
+        }
+        button {
+            background: #20d4aa;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 18px;
+            transition: background 0.2s, transform 0.2s;
+        }
+        button:hover {
+            background: #1bc4a0;
+            transform: translateY(-2px);
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 18px;
+            color: #20d4aa;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>{% if goal %}Edit{% else %}Add{% endif %} Goal</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="primary_goal">Primary Financial Goal</label>
+            <select name="primary_goal" id="primary_goal" required>
+                <option value="">Select...</option>
+                <option value="Retirement">Retirement</option>
+                <option value="Buying a Home">Buying a Home</option>
+                <option value="Child's Education">Child's Education</option>
+                <option value="Early Retirement">Early Retirement</option>
+                <option value="Wealth Creation">Wealth Creation</option>
+                <option value="Debt Reduction">Debt Reduction</option>
+                <option value="Starting a Business">Starting a Business</option>
+                <option value="Travel">Travel</option>
+                <option value="Other">Other</option>
+            </select>
+            <label for="primary_goal_details">Describe this goal in more detail</label>
+            <textarea name="primary_goal_details" id="primary_goal_details" rows="2"></textarea>
+            <label for="secondary_goals">Secondary Financial Goals (select all that apply)</label>
+            <select name="secondary_goals" id="secondary_goals" multiple>
+                <option value="Retirement">Retirement</option>
+                <option value="Buying a Home">Buying a Home</option>
+                <option value="Child's Education">Child's Education</option>
+                <option value="Early Retirement">Early Retirement</option>
+                <option value="Wealth Creation">Wealth Creation</option>
+                <option value="Debt Reduction">Debt Reduction</option>
+                <option value="Starting a Business">Starting a Business</option>
+                <option value="Travel">Travel</option>
+                <option value="Other">Other</option>
+            </select>
+            <label for="secondary_goal_timeline">Timeline for Secondary Goals</label>
+            <input type="text" name="secondary_goal_timeline" id="secondary_goal_timeline" placeholder="e.g. 3-5 years, 10 years, etc.">
+            <label for="risk_comfort">Comfort Level with Investment Risk</label>
+            <select name="risk_comfort" id="risk_comfort">
+                <option value="">Select...</option>
+                <option value="Very Low">Very Low</option>
+                <option value="Low">Low</option>
+                <option value="Moderate">Moderate</option>
+                <option value="High">High</option>
+                <option value="Very High">Very High</option>
+            </select>
+            <label for="investment_horizon">Investment Horizon</label>
+            <select name="investment_horizon" id="investment_horizon">
+                <option value="">Select...</option>
+                <option value="Less than 1 year">Less than 1 year</option>
+                <option value="1-3 years">1-3 years</option>
+                <option value="3-5 years">3-5 years</option>
+                <option value="5-10 years">5-10 years</option>
+                <option value="10+ years">10+ years</option>
+            </select>
+            <label for="major_life_events">Major Life Events in Next 1-5 Years</label>
+            <input type="text" name="major_life_events" id="major_life_events" placeholder="e.g. Marriage, children, career change, moving, health expenses">
+            <label for="goal">Goal Description</label>
+            <textarea name="goal" id="goal" rows="3">{% if goal %}{{ goal.goal }}{% endif %}</textarea>
+            <label for="target_amount">Target Amount</label>
+            <input type="number" step="0.01" name="target_amount" id="target_amount" value="{% if goal %}{{ goal.target_amount }}{% endif %}">
+            <label for="due_date">Due Date</label>
+            <input type="date" name="due_date" id="due_date" value="{% if goal and goal.due_date %}{{ goal.due_date }}{% endif %}">
+            <button type="submit">Save</button>
+        </form>
+        <a class="back-link" href="/dashboard/home/?username={{ user.username }}">Back to Goals</a>
+    </div>
+</body>
+</html> 

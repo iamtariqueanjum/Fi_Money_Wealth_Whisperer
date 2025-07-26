@@ -149,7 +149,7 @@
         <div class="main-layout">
             <div class="tabs">
                 <button class="tab">Networth</button>
-                <button class="tab">Current Goals</button>
+                <button class="tab">Financial Goals</button>
                 <button class="tab">Recent Transactions</button>
                 <button class="tab">Credit Report</button>
                 <button class="tab">EPF</button>
@@ -166,8 +166,18 @@
                     {% endif %}
                 </div>
                 <div class="tab-content">
-                    <h3>Current Goals</h3>
-                    <p>Your current financial goals will be shown here.</p>
+                    <h3>Financial Goals</h3>
+                    {% if goals and goals|length > 0 %}
+                        <ul>
+                            {% for goal in goals %}
+                                <li>{{ goal.goal }}</li>
+                            {% endfor %}
+                        </ul>
+                        <a href="/goals/{{ username }}/goals/">Manage Goals</a>
+                    {% else %}
+                        <p>No financial goals are set for you.</p>
+                        <a href="/goals/{{ username }}/goals/create/">Add a Goal</a>
+                    {% endif %}
                 </div>
                 <div class="tab-content">
                     <h3>Recent Transactions</h3>
