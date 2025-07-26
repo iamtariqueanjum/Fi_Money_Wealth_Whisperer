@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from goals.models import Goal, User as GoalsUser
+from google.cloud import firestore
 
 def get_user_file_data(username, filename):
     data = None
@@ -38,13 +39,36 @@ def home_view(request):
             net_worth = net_worth['netWorthResponse']['totalNetWorthValue']['units']
         except (KeyError, TypeError):
             net_worth = None
-    # Fetch goals for the user from the goals app
+    # Fetch goals for the user from Firestore Users collection
     goals = []
     try:
-        goals_user = GoalsUser.objects.get(username=username)
-        goals = Goal.objects.filter(user=goals_user).order_by('-created_at')
-    except GoalsUser.DoesNotExist:
-        goals = []
+        db = firestore.Client()
+        doc_ref = db.collection('Users').document(username)
+        user_doc = doc_ref.get()
+        if user_doc.exists:
+            user_data = user_doc.to_dict()
+            goals = user_data.get('goals', [])
+            # Ensure secondary_goals is always a list
+            for goal in goals:
+                if 'secondary_goals' in goal and isinstance(goal['secondary_goals'], str):
+                    if ',' in goal['secondary_goals']:
+                        goal['secondary_goals'] = [g.strip() for g in goal['secondary_goals'].split(',')]
+                    elif goal['secondary_goals']:
+                        goal['secondary_goals'] = [goal['secondary_goals']]
+                    else:
+                        goal['secondary_goals'] = []
+        else:
+            # Fallback to Django DB if Firestore doc doesn't exist
+            goals_user = GoalsUser.objects.get(username=username)
+            goals = list(Goal.objects.filter(user=goals_user).order_by('-created_at').values())
+    except Exception as e:
+        print(f"Error fetching goals from Firestore: {e}")
+        # Fallback to Django DB if Firestore fails
+        try:
+            goals_user = GoalsUser.objects.get(username=username)
+            goals = list(Goal.objects.filter(user=goals_user).order_by('-created_at').values())
+        except GoalsUser.DoesNotExist:
+            goals = []
     context = {
         'username': username,
         'net_worth': net_worth,

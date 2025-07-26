@@ -168,11 +168,34 @@
                 <div class="tab-content">
                     <h3>Financial Goals</h3>
                     {% if goals and goals|length > 0 %}
-                        <ul>
-                            {% for goal in goals %}
-                                <li>{{ goal.goal }}</li>
-                            {% endfor %}
-                        </ul>
+                        <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
+                            <thead>
+                                <tr style="background:#f7f8fa;">
+                                    <th style="padding:8px;border:1px solid #e2e8f0;">Goal</th>
+                                    <th style="padding:8px;border:1px solid #e2e8f0;">Target Amount</th>
+                                    <th style="padding:8px;border:1px solid #e2e8f0;">Due Date</th>
+                                    <th style="padding:8px;border:1px solid #e2e8f0;">Primary Goal</th>
+                                    <th style="padding:8px;border:1px solid #e2e8f0;">Secondary Goals</th>
+                                    <th style="padding:8px;border:1px solid #e2e8f0;">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for goal in goals %}
+                                    <tr>
+                                        <td style="padding:8px;border:1px solid #e2e8f0;">{{ goal.goal }}</td>
+                                        <td style="padding:8px;border:1px solid #e2e8f0;">{{ goal.target_amount }}</td>
+                                        <td style="padding:8px;border:1px solid #e2e8f0;">{{ goal.due_date }}</td>
+                                        <td style="padding:8px;border:1px solid #e2e8f0;">{{ goal.primary_goal }}</td>
+                                        <td style="padding:8px;border:1px solid #e2e8f0;">
+                                            {% if goal.secondary_goals %}
+                                                {{ goal.secondary_goals|join:", " }}
+                                            {% endif %}
+                                        </td>
+                                        <td style="padding:8px;border:1px solid #e2e8f0;">{{ goal.status|default:"-" }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                         <a href="/goals/{{ username }}/goals/">Manage Goals</a>
                     {% else %}
                         <p>No financial goals are set for you.</p>
