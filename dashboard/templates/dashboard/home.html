@@ -3,8 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <title>Home - Wealth Whisperer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f8fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            padding: 24px 32px 32px 32px;
+        }
+        .header-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        h2 {
+            margin: 0;
+            color: #2d3748;
+        }
+        .logout-btn {
+            background: #fff;
+            color: #2d3748;
+            border: 1.5px solid #20d4aa;
+            border-radius: 5px;
+            padding: 8px 18px;
+            font-size: 15px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+            float: right;
+        }
+        .logout-btn:hover {
+            background: #20d4aa;
+            color: #fff;
+            border-color: #20d4aa;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 24px;
+        }
+        .tab {
+            padding: 12px 32px;
+            cursor: pointer;
+            color: #4a5568;
+            border: none;
+            background: none;
+            font-size: 16px;
+            outline: none;
+            transition: color 0.2s;
+        }
+        .tab.active {
+            color: #20d4aa;
+            border-bottom: 3px solid #20d4aa;
+            font-weight: bold;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+            margin-top: 16px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+            tabs.forEach((tab, idx) => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+                    tab.classList.add('active');
+                    contents[idx].classList.add('active');
+                });
+            });
+            // Activate first tab by default
+            if (tabs.length) {
+                tabs[0].classList.add('active');
+                contents[0].classList.add('active');
+            }
+        });
+    </script>
 </head>
 <body>
-    <h2>Hello {{username}}!</h2>
+    <div class="container">
+        <div class="header-row">
+            <h2>Hello {{ username }}!</h2>
+            <form method="post" action="/users/logout/" style="margin:0;">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+        <div class="tabs">
+            <button class="tab">Account Balance</button>
+            <button class="tab">Current Goals</button>
+            <button class="tab">Recent Transactions</button>
+        </div>
+        <div class="tab-content">
+            <h3>Account Balance</h3>
+            <p>Your account balance will be shown here.</p>
+        </div>
+        <div class="tab-content">
+            <h3>Current Goals</h3>
+            <p>Your current financial goals will be shown here.</p>
+        </div>
+        <div class="tab-content">
+            <h3>Recent Transactions</h3>
+            <p>Your recent transactions will be shown here.</p>
+        </div>
+    </div>
 </body>
 </html> 
