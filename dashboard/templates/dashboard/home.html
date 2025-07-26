@@ -187,8 +187,41 @@
                 </div>
                 <div class="tab-content">
                     <h3>EPF</h3>
-                    {% if epf %}
-                        <pre style="white-space:pre-wrap;">{{ epf|safe }}</pre>
+                    {% if epf and epf.uanAccounts %}
+                        {% for account in epf.uanAccounts %}
+                            {% if account.rawDetails and account.rawDetails.est_details %}
+                                <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
+                                    <thead>
+                                        <tr style="background:#f7f8fa;">
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">Establishment Name</th>
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">Member ID</th>
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">Office</th>
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">DOJ EPF</th>
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">DOE EPF</th>
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">DOE EPS</th>
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">Net Balance</th>
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">Employee Share</th>
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">Employer Share</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for est in account.rawDetails.est_details %}
+                                            <tr>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.est_name }}</td>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.member_id }}</td>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.office }}</td>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.doj_epf }}</td>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.doe_epf }}</td>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.doe_eps }}</td>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.pf_balance.net_balance }}</td>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.pf_balance.employee_share.credit }}{% if est.pf_balance.employee_share.balance %} / {{ est.pf_balance.employee_share.balance }}{% endif %}</td>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.pf_balance.employer_share.credit }}{% if est.pf_balance.employer_share.balance %} / {{ est.pf_balance.employer_share.balance }}{% endif %}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% endif %}
+                        {% endfor %}
                     {% else %}
                         <p style="color:#e53e3e;">Please connect your account to show the EPF data.</p>
                     {% endif %}
