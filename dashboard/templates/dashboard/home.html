@@ -203,8 +203,32 @@
                 </div>
                 <div class="tab-content">
                     <h3>Stocks</h3>
-                    {% if stocks %}
-                        <pre style="white-space:pre-wrap;">{{ stocks|safe }}</pre>
+                    {% if stocks and stocks.stockTransactions %}
+                        {% for stock in stocks.stockTransactions %}
+                            <h4>ISIN: {{ stock.isin }}</h4>
+                            <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
+                                <thead>
+                                    <tr style="background:#f7f8fa;">
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Type</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Date</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Quantity</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">NAV Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for txn in stock.txns %}
+                                        <tr>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">
+                                                {% if txn.0 == 1 %}BUY{% elif txn.0 == 2 %}SELL{% elif txn.0 == 3 %}BONUS{% elif txn.0 == 4 %}SPLIT{% else %}{{ txn.0 }}{% endif %}
+                                            </td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.1 }}</td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.2 }}</td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.3|default:"-" }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endfor %}
                     {% else %}
                         <p style="color:#e53e3e;">Please connect your account to show the Stocks data.</p>
                     {% endif %}
