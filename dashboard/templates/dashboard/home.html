@@ -49,6 +49,10 @@
             display: flex;
             border-bottom: 2px solid #e2e8f0;
             margin-bottom: 24px;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: thin;
+            scrollbar-color: #20d4aa #e2e8f0;
         }
         .tab {
             padding: 12px 32px;
@@ -59,6 +63,7 @@
             font-size: 16px;
             outline: none;
             transition: color 0.2s;
+            flex: 0 0 auto;
         }
         .tab.active {
             color: #20d4aa;
@@ -103,18 +108,20 @@
             </form>
         </div>
         <div class="tabs">
-            <button class="tab">Your networth</button>
+            <button class="tab">Account Balance</button>
             <button class="tab">Current Goals</button>
             <button class="tab">Recent Transactions</button>
+            <button class="tab">Credit Report</button>
+            <button class="tab">EPF</button>
+            <button class="tab">MF</button>
+            <button class="tab">Stocks</button>
         </div>
         <div class="tab-content">
             <h3>Account Balance</h3>
             {% if net_worth %}
                 <p>Your current net worth: <strong>₹{{ net_worth }}</strong></p>
-            {% elif net_worth_error %}
-                <p style="color:#e53e3e;">{{ net_worth_error }}</p>
             {% else %}
-                <p>Loading...</p>
+                <p style="color:#e53e3e;">Please connect your account to show the net worth data.</p>
             {% endif %}
         </div>
         <div class="tab-content">
@@ -123,7 +130,43 @@
         </div>
         <div class="tab-content">
             <h3>Recent Transactions</h3>
-            <p>Your recent transactions will be shown here.</p>
+            {% if recent_transactions %}
+                <pre style="white-space:pre-wrap;">{{ recent_transactions|safe }}</pre>
+            {% else %}
+                <p style="color:#e53e3e;">Please connect your account to show the recent transactions data.</p>
+            {% endif %}
+        </div>
+        <div class="tab-content">
+            <h3>Credit Report</h3>
+            {% if credit_score %}
+                <p><strong>Credit Score:</strong> {{ credit_score }}</p>
+            {% else %}
+                <p style="color:#e53e3e;">Please connect your account to show the credit report data.</p>
+            {% endif %}
+        </div>
+        <div class="tab-content">
+            <h3>EPF</h3>
+            {% if epf %}
+                <pre style="white-space:pre-wrap;">{{ epf|safe }}</pre>
+            {% else %}
+                <p style="color:#e53e3e;">Please connect your account to show the EPF data.</p>
+            {% endif %}
+        </div>
+        <div class="tab-content">
+            <h3>MF</h3>
+            {% if mf %}
+                <pre style="white-space:pre-wrap;">{{ mf|safe }}</pre>
+            {% else %}
+                <p style="color:#e53e3e;">Please connect your account to show the MF data.</p>
+            {% endif %}
+        </div>
+        <div class="tab-content">
+            <h3>Stocks</h3>
+            {% if stocks %}
+                <pre style="white-space:pre-wrap;">{{ stocks|safe }}</pre>
+            {% else %}
+                <p style="color:#e53e3e;">Please connect your account to show the Stocks data.</p>
+            {% endif %}
         </div>
     </div>
 </body>
