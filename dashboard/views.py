@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from goals.models import Goal, User as GoalsUser
 
 def get_user_file_data(username, filename):
     data = None
@@ -37,6 +38,13 @@ def home_view(request):
             net_worth = net_worth['netWorthResponse']['totalNetWorthValue']['units']
         except (KeyError, TypeError):
             net_worth = None
+    # Fetch goals for the user from the goals app
+    goals = []
+    try:
+        goals_user = GoalsUser.objects.get(username=username)
+        goals = Goal.objects.filter(user=goals_user).order_by('-created_at')
+    except GoalsUser.DoesNotExist:
+        goals = []
     context = {
         'username': username,
         'net_worth': net_worth,
@@ -46,5 +54,6 @@ def home_view(request):
         'stocks': stocks,
         'recent_transactions': recent_transactions,
         'credit_score': credit_score,
+        'goals': goals,
     }
     return render(request, 'dashboard/home.html', context)

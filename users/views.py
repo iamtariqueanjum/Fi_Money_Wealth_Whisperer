@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -15,6 +16,7 @@ def login_view(request):
             messages.error(request, 'Invalid username or password')
     return render(request, 'users/login.html')
 
+@csrf_exempt
 def logout_view(request):
     if request.method == 'POST':
         # logout(request)

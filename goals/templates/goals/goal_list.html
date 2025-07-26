@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ user.username }}'s Goals</title>
+</head>
+<body>
+    <h2>{{ user.username }}'s Financial Goals</h2>
+    <a href="{% url 'goal_create' user.username %}">Add New Goal</a>
+    <ul>
+        {% for goal in goals %}
+            <li>
+                {{ goal.goal }}
+                <a href="{% url 'goal_update' user.username goal.id %}">Edit</a>
+                <a href="{% url 'goal_delete' user.username goal.id %}">Delete</a>
+            </li>
+        {% empty %}
+            <li>No goals yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html> 

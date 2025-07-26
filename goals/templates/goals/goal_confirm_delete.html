@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Goal</title>
+</head>
+<body>
+    <h2>Delete Goal for {{ user.username }}</h2>
+    <p>Are you sure you want to delete this goal?</p>
+    <blockquote>{{ goal.goal }}</blockquote>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, delete</button>
+        <a href="{% url 'goal_list' user.username %}">Cancel</a>
+    </form>
+</body>
+</html> 
