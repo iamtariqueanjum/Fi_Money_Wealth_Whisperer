@@ -171,8 +171,36 @@
                 </div>
                 <div class="tab-content">
                     <h3>Recent Transactions</h3>
-                    {% if recent_transactions %}
-                        <pre style="white-space:pre-wrap;">{{ recent_transactions|safe }}</pre>
+                    {% if recent_transactions and recent_transactions.bankTransactions %}
+                        {% for bank in recent_transactions.bankTransactions %}
+                            <h4>{{ bank.bank }}</h4>
+                            <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
+                                <thead>
+                                    <tr style="background:#f7f8fa;">
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Amount</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Narration</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Date</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Type</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Mode</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for txn in bank.txns %}
+                                        <tr>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.0 }}</td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.1 }}</td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.2 }}</td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">
+                                                {% if txn.3 == 1 %}CREDIT{% elif txn.3 == 2 %}DEBIT{% elif txn.3 == 3 %}OPENING{% elif txn.3 == 4 %}INTEREST{% elif txn.3 == 5 %}TDS{% elif txn.3 == 6 %}INSTALLMENT{% elif txn.3 == 7 %}CLOSING{% elif txn.3 == 8 %}OTHERS{% else %}{{ txn.3 }}{% endif %}
+                                            </td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.4 }}</td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.5 }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endfor %}
                     {% else %}
                         <p style="color:#e53e3e;">Please connect your account to show the recent transactions data.</p>
                     {% endif %}
