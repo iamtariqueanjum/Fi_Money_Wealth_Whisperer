@@ -3,23 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - Wealth Whisperer</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f7f8fa 0%, #e6fcf7 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 16px 0 rgba(32, 212, 170, 0.08);
+            padding: 40px 32px 32px 32px;
+            min-width: 340px;
+            max-width: 90vw;
+        }
+        .login-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #20d4aa;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+        .login-form label {
+            display: block;
+            color: #20d4aa;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            margin-top: 18px;
+        }
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #20d4aa;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #222;
+            background: #f7f8fa;
+            margin-bottom: 4px;
+            outline: none;
+            transition: border 0.2s, box-shadow 0.2s;
+        }
+        .login-form input[type="text"]:focus,
+        .login-form input[type="password"]:focus {
+            border-color: #1bc4a0;
+            box-shadow: 0 0 0 2px rgba(32, 212, 170, 0.15);
+        }
+        .login-form button[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            background: #20d4aa;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 22px;
+            transition: background 0.2s, transform 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .login-form button[type="submit"]:hover {
+            background: #1bc4a0;
+            transform: translateY(-2px);
+        }
+        .login-messages {
+            color: #e53e3e;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h2>Login</h2>
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    <form method="post">
-        {% csrf_token %}
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        <button type="submit">Login</button>
-    </form>
+    <div class="login-container">
+        <div class="login-title">Login</div>
+        {% if messages %}
+            <div class="login-messages">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <form method="post" class="login-form">
+            {% csrf_token %}
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
 </body>
 </html> 
