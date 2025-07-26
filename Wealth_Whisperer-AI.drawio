@@ -1,0 +1,126 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36" version="27.2.0">
+  <diagram name="Page-1" id="WzYazhsnSwZsc0X3zXtO">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="U9w6U5YVwnzO4c40B4l2-2" value="Fi MCP&lt;br&gt;Server" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="-30" y="160" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="U9w6U5YVwnzO4c40B4l2-4" value="User Input" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="90" y="305" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="U9w6U5YVwnzO4c40B4l2-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="U9w6U5YVwnzO4c40B4l2-18" target="U9w6U5YVwnzO4c40B4l2-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U9w6U5YVwnzO4c40B4l2-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="U9w6U5YVwnzO4c40B4l2-18" target="U9w6U5YVwnzO4c40B4l2-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U9w6U5YVwnzO4c40B4l2-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="U9w6U5YVwnzO4c40B4l2-18" target="U9w6U5YVwnzO4c40B4l2-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="U9w6U5YVwnzO4c40B4l2-18" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;Gemini API&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="U9w6U5YVwnzO4c40B4l2-21" value="News article references" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="290" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="U9w6U5YVwnzO4c40B4l2-22" value="Market Trends" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="370" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="U9w6U5YVwnzO4c40B4l2-23" value="Financial Suggestions" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="840" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-2" value="User Dashboard" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="370" y="160" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="Hd7Uzk-TOv8m8Qbjf4Wz-4" target="Hd7Uzk-TOv8m8Qbjf4Wz-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-4" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="180" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=0;exitDy=70;exitPerimeter=0;" edge="1" parent="1" source="Hd7Uzk-TOv8m8Qbjf4Wz-5" target="Hd7Uzk-TOv8m8Qbjf4Wz-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-5" value="User Goals&lt;br&gt;Credit Report&lt;div&gt;Networth&lt;/div&gt;&lt;div&gt;Stocks&lt;/div&gt;&lt;div&gt;MFs&lt;/div&gt;&lt;div&gt;Bank Transactions&lt;/div&gt;" style="shape=card;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="60" y="410" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=75;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Hd7Uzk-TOv8m8Qbjf4Wz-2" target="Hd7Uzk-TOv8m8Qbjf4Wz-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.3333333333333333;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Hd7Uzk-TOv8m8Qbjf4Wz-4" target="Hd7Uzk-TOv8m8Qbjf4Wz-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-9" value="Authentication" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="260" y="180" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0;entryDx=15;entryDy=15;entryPerimeter=0;" edge="1" parent="1" source="U9w6U5YVwnzO4c40B4l2-2" target="Hd7Uzk-TOv8m8Qbjf4Wz-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-15" value="Firebase" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-80" y="560" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-16" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-180" y="110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-18" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;arcSize=50;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-170" y="120" width="20" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-19" value="Datastore" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-140" y="110" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="Hd7Uzk-TOv8m8Qbjf4Wz-23" target="Hd7Uzk-TOv8m8Qbjf4Wz-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-23" value="&lt;div&gt;User&lt;br&gt;&lt;div&gt;{&lt;/div&gt;&lt;div&gt;&amp;nbsp; &quot;name&quot;: &quot;Alice Wonderland&quot;,&lt;/div&gt;&lt;div&gt;&amp;nbsp; &quot;email&quot;: &quot;alice@example.com&quot;,&lt;/div&gt;&lt;div&gt;&amp;nbsp; &quot;risk_tolerance&quot;: &quot;medium&quot;,&lt;/div&gt;&lt;div&gt;&amp;nbsp; &quot;investment_horizon_years&quot;: 15,&lt;/div&gt;&lt;div&gt;&amp;nbsp; &quot;current_net_worth_in_lakhs&quot;: 120, // 1.2 Crores&lt;/div&gt;&lt;div&gt;&amp;nbsp; &quot;primary_goal&quot;: &quot;Retirement fund of 5 Crores&quot;,&lt;/div&gt;&lt;div&gt;&amp;nbsp; &quot;secondary_goal&quot;: &quot;Down payment for a house in 5 years (1.5 Crores)&quot;&lt;/div&gt;&lt;div&gt;}&lt;/div&gt;&lt;/div&gt;" style="shape=card;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="-30" y="700" width="210" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-27" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="Hd7Uzk-TOv8m8Qbjf4Wz-24" target="Hd7Uzk-TOv8m8Qbjf4Wz-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="Hd7Uzk-TOv8m8Qbjf4Wz-24" target="Hd7Uzk-TOv8m8Qbjf4Wz-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-24" value="Transaction&lt;br&gt;{&lt;br/&gt;  &lt;span class=&quot;hljs-attr&quot;&gt;&quot;user_id&quot;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&quot;user_alice&quot;&lt;/span&gt;,&lt;br/&gt;  &lt;span class=&quot;hljs-attr&quot;&gt;&quot;date&quot;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&quot;2025-07-20T15:00:00Z&quot;&lt;/span&gt;,&lt;br/&gt;  &lt;span class=&quot;hljs-attr&quot;&gt;&quot;amount&quot;&lt;/span&gt;: &lt;span class=&quot;hljs-number&quot;&gt;-15000&lt;/span&gt;,&lt;br/&gt;  &lt;span class=&quot;hljs-attr&quot;&gt;&quot;description&quot;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&quot;Restaurant Dinner with Friends&quot;&lt;/span&gt;,&lt;br/&gt;  &lt;span class=&quot;hljs-attr&quot;&gt;&quot;category&quot;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&quot;Dining&quot;&lt;/span&gt;,&lt;br/&gt;  &lt;span class=&quot;hljs-attr&quot;&gt;&quot;fi_mcp_tag&quot;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&quot;Food &amp;amp; Entertainment&quot;&lt;/span&gt;&lt;br/&gt;}" style="shape=card;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="-280" y="700" width="180" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-26" value="Recent Behaviour" style="ellipse;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="-230" y="560" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="Hd7Uzk-TOv8m8Qbjf4Wz-30" target="Hd7Uzk-TOv8m8Qbjf4Wz-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-30" value="Context Generation" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-110" y="960" width="150" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-33" value="chroma db" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-230" y="1220" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="Hd7Uzk-TOv8m8Qbjf4Wz-34">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="610" y="653" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-34" value="Indexing &amp;amp; Vector Embedding&amp;nbsp;&lt;br&gt;Generation&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-95" y="1170" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="Hd7Uzk-TOv8m8Qbjf4Wz-34" target="Hd7Uzk-TOv8m8Qbjf4Wz-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-37" value="&lt;div&gt;# Assuming genai is configured from Step 0&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;# Define the Embedding Function for ChromaDB (same as previous example)&lt;/div&gt;&lt;div&gt;class GeminiEmbeddingFunction(EmbeddingFunction):&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; def __call__(self, input: Documents) -&amp;gt; Embeddings:&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; embeddings_list = genai.embed_content(&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; model=&quot;models/text-embedding-004&quot;, # Use the latest embedding model&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; content=input,&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; task_type=&quot;retrieval_document&quot; # Task type for documents&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; )[&quot;embedding&quot;]&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; return [e for e in embeddings_list]&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;# Initialize ChromaDB client and collection&lt;/div&gt;&lt;div&gt;chroma_client = Client()&lt;/div&gt;&lt;div&gt;# This collection will store the financial contexts of individual users.&lt;/div&gt;&lt;div&gt;# You could have a separate collection for general market news or financial product info.&lt;/div&gt;&lt;div&gt;user_financial_context_collection = chroma_client.get_or_create_collection(&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; name=&quot;user_financial_contexts&quot;,&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; embedding_function=GeminiEmbeddingFunction()&lt;/div&gt;&lt;div&gt;)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;def index_user_financial_context(user_id: str):&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &quot;&quot;&quot;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; Fetches user data, generates its embedding, and stores/updates it in the vector DB.&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; This function should be called whenever a user&#39;s financial data significantly changes&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; (e.g., new goals, large transactions, net worth update).&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &quot;&quot;&quot;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; context_text = get_user_financial_context_from_firestore(user_id)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; if &quot;Error:&quot; in context_text or &quot;No financial data&quot; in context_text:&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; print(f&quot;Skipping indexing for {user_id}: {context_text}&quot;)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; return&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; # For user-specific context, we often treat the entire formatted string as one chunk.&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; # If the user context becomes very long, you might need to chunk it further.&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; document_id = f&quot;user_context_{user_id}&quot; # A unique ID for this user&#39;s context document&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; # Check if the document already exists to decide between add or update&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; existing_docs = user_financial_context_collection.get(ids=[document_id])&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; if existing_docs[&#39;ids&#39;]:&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; # Update existing document&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; user_financial_context_collection.update(&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; ids=[document_id],&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; documents=[context_text] # Re-embeds the updated content&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; )&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; print(f&quot;Updated financial context for user {user_id} in vector DB.&quot;)&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; else:&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; # Add new document&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; user_financial_context_collection.add(&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; documents=[context_text],&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; ids=[document_id]&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; )&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; print(f&quot;Added financial context for user {user_id} to vector DB.&quot;)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;# Sample usage:&lt;/div&gt;&lt;div&gt;# index_user_financial_context(&quot;user_alice&quot;)&lt;/div&gt;&lt;div&gt;# index_user_financial_context(&quot;user_bob&quot;)&lt;/div&gt;" style="shape=card;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="-740" y="1000" width="480" height="850" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="Hd7Uzk-TOv8m8Qbjf4Wz-40" target="U9w6U5YVwnzO4c40B4l2-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-40" value="&lt;div&gt;Prompt&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="590" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Hd7Uzk-TOv8m8Qbjf4Wz-42" value="&lt;span class=&quot;hljs-string&quot;&gt;f&quot;&quot;&quot;&lt;br/&gt;    You are an expert AI financial advisor named &quot;Wealth Whisperer&quot;.&lt;br/&gt;    Your goal is to provide helpful, actionable, and personalized financial suggestions.&lt;br/&gt;    Strictly use ONLY the provided &quot;User Financial Context&quot; to answer the question.&lt;br/&gt;    If the context does not contain the information needed to answer the question, state that.&lt;br/&gt;    Do not make up information or financial data.&lt;br/&gt;&lt;br/&gt;    User Financial Context:&lt;br/&gt;    &lt;span class=&quot;hljs-subst&quot;&gt;{user_financial_context}&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;    User&#39;s Question: &lt;span class=&quot;hljs-subst&quot;&gt;{user_query}&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;    Based on the above context and question, provide a detailed and actionable financial suggestion:&lt;br/&gt;    &quot;&quot;&quot;&lt;/span&gt;" style="shape=card;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="680" y="570" width="260" height="310" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
