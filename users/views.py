@@ -10,8 +10,7 @@ def login_view(request):
         password = request.POST.get('password')
         # user = authenticate(request, username=username, password=password)
         if username is not None and password is not None:
-            # login(request, user)
-            return redirect(reverse('home'))  # Replace with your dashboard URL name
+            return redirect(f'/dashboard/home/?username={username}')
         else:
             messages.error(request, 'Invalid username or password')
     return render(request, 'users/login.html')

@@ -8,4 +8,5 @@ from django.contrib import messages
 # Create your views here.
 
 def home_view(request):
-    return render(request, 'dashboard/home.html')
+    username = request.GET.get('username')  
+    return render(request, 'dashboard/home.html', {'username': username})
