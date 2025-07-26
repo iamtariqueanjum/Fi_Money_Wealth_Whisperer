@@ -8,6 +8,15 @@ from google.cloud import firestore
 def goal_list(request, username):
     user = get_object_or_404(User, username=username)
     goals = Goal.objects.filter(user=user).order_by('-created_at')
+    # Ensure secondary_goals is always a list for each goal
+    for goal in goals:
+        if hasattr(goal, 'secondary_goals') and isinstance(goal.secondary_goals, str):
+            if ',' in goal.secondary_goals:
+                goal.secondary_goals = [g.strip() for g in goal.secondary_goals.split(',')]
+            elif goal.secondary_goals:
+                goal.secondary_goals = [goal.secondary_goals]
+            else:
+                goal.secondary_goals = []
     return render(request, 'goals/goal_list.html', {'user': user, 'goals': goals})
 
 # Flattening function from script.py
@@ -120,7 +129,55 @@ def goal_create(request, username):
 
 def goal_update(request, username, goal_id):
     user = get_object_or_404(User, username=username)
-    goal = get_object_or_404(Goal, id=goal_id, user=user)
+    # Try to fetch goal data from Firestore first
+    goal_data = None
+    try:
+        db = firestore.Client()
+        doc_ref = db.collection('Users').document(username)
+        user_doc = doc_ref.get()
+        if user_doc.exists:
+            user_data = user_doc.to_dict()
+            goals_list = user_data.get('goals', [])
+            for g in goals_list:
+                # goal_id may be int or str, so compare as str
+                if str(g.get('goal_id')) == str(goal_id):
+                    goal_data = g
+                    break
+            # Ensure secondary_goals is always a list
+            if goal_data and 'secondary_goals' in goal_data and isinstance(goal_data['secondary_goals'], str):
+                if ',' in goal_data['secondary_goals']:
+                    goal_data['secondary_goals'] = [s.strip() for s in goal_data['secondary_goals'].split(',')]
+                elif goal_data['secondary_goals']:
+                    goal_data['secondary_goals'] = [goal_data['secondary_goals']]
+                else:
+                    goal_data['secondary_goals'] = []
+    except Exception as e:
+        print(f"Error fetching goal from Firestore: {e}")
+    # If not found in Firestore, fall back to Django DB
+    if not goal_data:
+        goal = get_object_or_404(Goal, id=goal_id, user=user)
+        # Convert secondary_goals to list for the form
+        if hasattr(goal, 'secondary_goals') and isinstance(goal.secondary_goals, str):
+            if ',' in goal.secondary_goals:
+                secondary_goals_list = [g.strip() for g in goal.secondary_goals.split(',')]
+            elif goal.secondary_goals:
+                secondary_goals_list = [goal.secondary_goals]
+            else:
+                secondary_goals_list = []
+        else:
+            secondary_goals_list = goal.secondary_goals if hasattr(goal, 'secondary_goals') else []
+        goal_data = {
+            'goal': goal.goal,
+            'target_amount': goal.target_amount,
+            'due_date': goal.due_date,
+            'primary_goal': goal.primary_goal,
+            'primary_goal_details': goal.primary_goal_details,
+            'secondary_goals': secondary_goals_list,
+            'secondary_goal_timeline': goal.secondary_goal_timeline,
+            'risk_comfort': goal.risk_comfort,
+            'investment_horizon': goal.investment_horizon,
+            'major_life_events': goal.major_life_events,
+        }
     if request.method == 'POST':
         goal_text = request.POST.get('goal')
         target_amount = request.POST.get('target_amount')
@@ -145,7 +202,7 @@ def goal_update(request, username, goal_id):
             goal.major_life_events = major_life_events
             goal.save()
             return redirect('home')
-    return render(request, 'goals/goal_form.html', {'user': user, 'goal': goal})
+    return render(request, 'goals/goal_form.html', {'user': user, 'goal': goal_data})
 
 def goal_delete(request, username, goal_id):
     user = get_object_or_404(User, username=username)

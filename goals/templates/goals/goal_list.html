@@ -2,20 +2,108 @@
 <html>
 <head>
     <title>{{ user.username }}'s Goals</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f8fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            padding: 24px 32px 32px 32px;
+        }
+        h2 {
+            color: #2d3748;
+        }
+        .btn {
+            background: #20d4aa;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-right: 10px;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .btn:hover {
+            background: #1bc4a0;
+            color: #fff;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        th {
+            background: #f7f8fa;
+        }
+        .actions a {
+            margin-right: 8px;
+            color: #20d4aa;
+            text-decoration: underline;
+        }
+        .actions a:hover {
+            color: #1bc4a0;
+        }
+    </style>
 </head>
 <body>
-    <h2>{{ user.username }}'s Financial Goals</h2>
-    <a href="{% url 'goal_create' user.username %}">Add New Goal</a>
-    <ul>
-        {% for goal in goals %}
-            <li>
-                {{ goal.goal }}
-                <a href="{% url 'goal_update' user.username goal.id %}">Edit</a>
-                <a href="{% url 'goal_delete' user.username goal.id %}">Delete</a>
-            </li>
-        {% empty %}
-            <li>No goals yet.</li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <h2>{{ user.username }}'s Financial Goals</h2>
+        <div style="margin-bottom: 18px;">
+            <a class="btn" href="/dashboard/home/?username={{ user.username }}">Back to Home</a>
+            <a class="btn" href="{% url 'goal_create' user.username %}">Add New Goal</a>
+        </div>
+        {% if goals %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Goal</th>
+                        <th>Target Amount</th>
+                        <th>Due Date</th>
+                        <th>Primary Goal</th>
+                        <th>Secondary Goals</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for goal in goals %}
+                        <tr>
+                            <td>{{ goal.goal }}</td>
+                            <td>{{ goal.target_amount }}</td>
+                            <td>{{ goal.due_date }}</td>
+                            <td>{{ goal.primary_goal }}</td>
+                            <td>
+                                {% if goal.secondary_goals %}
+                                    {{ goal.secondary_goals|join:", " }}
+                                {% endif %}
+                            </td>
+                            <td>{{ goal.status|default:"-" }}</td>
+                            <td class="actions">
+                                <a href="{% url 'goal_update' user.username goal.id %}">Edit</a>
+                                <a href="{% url 'goal_delete' user.username goal.id %}">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No goals yet.</p>
+        {% endif %}
+    </div>
 </body>
 </html> 
