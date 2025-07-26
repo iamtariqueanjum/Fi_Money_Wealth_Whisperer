@@ -11,7 +11,7 @@
             padding: 0;
         }
         .container {
-            max-width: 700px;
+            max-width: 900px;
             margin: 0 auto;
             background: #fff;
             border-radius: 10px;
@@ -45,32 +45,76 @@
             color: #fff;
             border-color: #20d4aa;
         }
+        .main-layout {
+            display: flex;
+            flex-direction: row;
+            gap: 32px;
+        }
         .tabs {
             display: flex;
-            border-bottom: 2px solid #e2e8f0;
-            margin-bottom: 24px;
+            flex-direction: column;
+            border-right: 2px solid #e2e8f0;
+            margin-bottom: 0;
+            min-width: 200px;
+            max-width: 220px;
+            height: 400px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #20d4aa #e2e8f0;
         }
         .tab {
-            padding: 12px 32px;
+            padding: 18px 24px;
             cursor: pointer;
             color: #4a5568;
             border: none;
             background: none;
             font-size: 16px;
             outline: none;
-            transition: color 0.2s;
+            transition: color 0.2s, background 0.2s;
+            text-align: left;
+            flex: 0 0 auto;
         }
         .tab.active {
             color: #20d4aa;
-            border-bottom: 3px solid #20d4aa;
+            background: #e6fcf7;
+            border-right: 4px solid #20d4aa;
             font-weight: bold;
+        }
+        .tab-content-area {
+            flex: 1;
+            min-width: 0;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-left: 24px;
         }
         .tab-content {
             display: none;
         }
         .tab-content.active {
             display: block;
-            margin-top: 16px;
+            margin-top: 0;
+        }
+        @media (max-width: 900px) {
+            .main-layout {
+                flex-direction: column;
+            }
+            .tabs {
+                flex-direction: row;
+                border-right: none;
+                border-bottom: 2px solid #e2e8f0;
+                min-width: 0;
+                max-width: 100vw;
+                height: auto;
+                overflow-x: auto;
+                overflow-y: hidden;
+            }
+            .tab {
+                padding: 12px 18px;
+                text-align: center;
+            }
+            .tab-content-area {
+                padding-left: 0;
+            }
         }
     </style>
     <script>
@@ -102,22 +146,181 @@
                 <button type="submit" class="logout-btn">Logout</button>
             </form>
         </div>
-        <div class="tabs">
-            <button class="tab">Account Balance</button>
-            <button class="tab">Current Goals</button>
-            <button class="tab">Recent Transactions</button>
-        </div>
-        <div class="tab-content">
-            <h3>Account Balance</h3>
-            <p>Your account balance will be shown here.</p>
-        </div>
-        <div class="tab-content">
-            <h3>Current Goals</h3>
-            <p>Your current financial goals will be shown here.</p>
-        </div>
-        <div class="tab-content">
-            <h3>Recent Transactions</h3>
-            <p>Your recent transactions will be shown here.</p>
+        <div class="main-layout">
+            <div class="tabs">
+                <button class="tab">Networth</button>
+                <button class="tab">Current Goals</button>
+                <button class="tab">Recent Transactions</button>
+                <button class="tab">Credit Report</button>
+                <button class="tab">EPF</button>
+                <button class="tab">MF</button>
+                <button class="tab">Stocks</button>
+            </div>
+            <div class="tab-content-area">
+                <div class="tab-content">
+                    <h3>Networth</h3>
+                    {% if net_worth %}
+                        <p>Your current net worth: <strong>₹{{ net_worth }}</strong></p>
+                    {% else %}
+                        <p style="color:#e53e3e;">Please connect your account to show the net worth data.</p>
+                    {% endif %}
+                </div>
+                <div class="tab-content">
+                    <h3>Current Goals</h3>
+                    <p>Your current financial goals will be shown here.</p>
+                </div>
+                <div class="tab-content">
+                    <h3>Recent Transactions</h3>
+                    {% if recent_transactions and recent_transactions.bankTransactions %}
+                        {% for bank in recent_transactions.bankTransactions %}
+                            <h4>{{ bank.bank }}</h4>
+                            <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
+                                <thead>
+                                    <tr style="background:#f7f8fa;">
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Amount</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Narration</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Date</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Type</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Mode</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for txn in bank.txns %}
+                                        <tr>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.0 }}</td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.1 }}</td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.2 }}</td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">
+                                                {% if txn.3 == 1 %}CREDIT{% elif txn.3 == 2 %}DEBIT{% elif txn.3 == 3 %}OPENING{% elif txn.3 == 4 %}INTEREST{% elif txn.3 == 5 %}TDS{% elif txn.3 == 6 %}INSTALLMENT{% elif txn.3 == 7 %}CLOSING{% elif txn.3 == 8 %}OTHERS{% else %}{{ txn.3 }}{% endif %}
+                                            </td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.4 }}</td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.5 }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color:#e53e3e;">Please connect your account to show the recent transactions data.</p>
+                    {% endif %}
+                </div>
+                <div class="tab-content">
+                    <h3>Credit Report</h3>
+                    {% if credit_score %}
+                        <p><strong>Credit Score:</strong> {{ credit_score }}</p>
+                    {% else %}
+                        <p style="color:#e53e3e;">Please connect your account to show the credit report data.</p>
+                    {% endif %}
+                </div>
+                <div class="tab-content">
+                    <h3>EPF</h3>
+                    {% if epf and epf.uanAccounts %}
+                        {% for account in epf.uanAccounts %}
+                            {% if account.rawDetails and account.rawDetails.est_details %}
+                                <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
+                                    <thead>
+                                        <tr style="background:#f7f8fa;">
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">Establishment Name</th>
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">Member ID</th>
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">Office</th>
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">DOJ EPF</th>
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">DOE EPF</th>
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">DOE EPS</th>
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">Net Balance</th>
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">Employee Share</th>
+                                            <th style="padding:8px;border:1px solid #e2e8f0;">Employer Share</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for est in account.rawDetails.est_details %}
+                                            <tr>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.est_name }}</td>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.member_id }}</td>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.office }}</td>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.doj_epf }}</td>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.doe_epf }}</td>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.doe_eps }}</td>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.pf_balance.net_balance }}</td>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.pf_balance.employee_share.credit }}{% if est.pf_balance.employee_share.balance %} / {{ est.pf_balance.employee_share.balance }}{% endif %}</td>
+                                                <td style="padding:8px;border:1px solid #e2e8f0;">{{ est.pf_balance.employer_share.credit }}{% if est.pf_balance.employer_share.balance %} / {{ est.pf_balance.employer_share.balance }}{% endif %}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <p style="color:#e53e3e;">Please connect your account to show the EPF data.</p>
+                    {% endif %}
+                </div>
+                <div class="tab-content">
+                    <h3>MF</h3>
+                    {% if mf and mf.mfTransactions %}
+                        {% for mf_item in mf.mfTransactions %}
+                            <h4>{{ mf_item.schemeName }} (ISIN: {{ mf_item.isin }})</h4>
+                            <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
+                                <thead>
+                                    <tr style="background:#f7f8fa;">
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Type</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Date</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Purchase Price</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Units</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for txn in mf_item.txns %}
+                                        <tr>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">
+                                                {% if txn.0 == 1 %}BUY{% elif txn.0 == 2 %}SELL{% else %}{{ txn.0 }}{% endif %}
+                                            </td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.1 }}</td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.2 }}</td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.3 }}</td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.4 }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color:#e53e3e;">Please connect your account to show the MF data.</p>
+                    {% endif %}
+                </div>
+                <div class="tab-content">
+                    <h3>Stocks</h3>
+                    {% if stocks and stocks.stockTransactions %}
+                        {% for stock in stocks.stockTransactions %}
+                            <h4>ISIN: {{ stock.isin }}</h4>
+                            <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">
+                                <thead>
+                                    <tr style="background:#f7f8fa;">
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Type</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Date</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">Quantity</th>
+                                        <th style="padding:8px;border:1px solid #e2e8f0;">NAV Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for txn in stock.txns %}
+                                        <tr>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">
+                                                {% if txn.0 == 1 %}BUY{% elif txn.0 == 2 %}SELL{% elif txn.0 == 3 %}BONUS{% elif txn.0 == 4 %}SPLIT{% else %}{{ txn.0 }}{% endif %}
+                                            </td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.1 }}</td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.2 }}</td>
+                                            <td style="padding:8px;border:1px solid #e2e8f0;">{{ txn.3|default:"-" }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endfor %}
+                    {% else %}
+                        <p style="color:#e53e3e;">Please connect your account to show the Stocks data.</p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 </body>
