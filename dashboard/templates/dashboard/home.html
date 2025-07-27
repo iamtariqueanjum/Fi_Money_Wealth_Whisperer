@@ -135,6 +135,52 @@
                 contents[0].classList.add('active');
             }
         });
+
+        function parseRecommendationsWithReasons(rawText) {
+            // Split by lines, group each actionable item with its reason (if present)
+            const lines = rawText.split(/\n|<br\s*\/>/).map(l => l.trim()).filter(Boolean);
+            const items = [];
+            let current = null;
+            for (let i = 0; i < lines.length; i++) {
+                let line = lines[i];
+                // Remove leading numbering, bolding, and special chars
+                line = line.replace(/^\d+\.?\s*/, '').replace(/\*\*/g, '').replace(/^(<b>|<strong>)/i, '').replace(/(<\/b>|<\/strong>)$/i, '').trim();
+                if (!line) continue;
+                if (/^(reason:|- reason:)/i.test(line)) {
+                    if (current) {
+                        // Remove any leading numbering, dash, or bolding from reason
+                        let reasonText = line.replace(/^(reason:|- reason:)/i, '').replace(/^\d+\.?\s*/, '').replace(/^[-•]\s*/, '').replace(/\*\*/g, '').trim();
+                        current.reason = reasonText;
+                    }
+                } else {
+                    if (current) items.push(current);
+                    current = { action: line, reason: null };
+                }
+            }
+            if (current) items.push(current);
+            return items.slice(0, 5); // Only top 5
+        }
+
+        function displayRecommendations(rawText) {
+            const recs = parseRecommendationsWithReasons(rawText);
+            const recList = document.getElementById('recommendations-list');
+            recList.innerHTML = '';
+            recs.forEach((rec, idx) => {
+                const li = document.createElement('li');
+                li.textContent = rec.action;
+                if (rec.reason) {
+                    const reasonDiv = document.createElement('div');
+                    reasonDiv.textContent = rec.reason;
+                    reasonDiv.style.fontSize = '0.97em';
+                    reasonDiv.style.color = '#444';
+                    reasonDiv.style.margin = '4px 0 0 0';
+                    reasonDiv.style.paddingLeft = '8px';
+                    li.appendChild(reasonDiv);
+                }
+                recList.appendChild(li);
+            });
+            document.getElementById('recommendations-container').style.display = 'block';
+        }
     </script>
 </head>
 <body>
@@ -200,23 +246,11 @@
                             <button id="get-recommendations-btn" class="logout-btn">Get Recommendations</button>
                             <a href="/goals/{{ username }}/goals/" class="logout-btn">Manage Goals</a>
                         </div>
-                        <div id="recommendations-output" style="margin-top:0; text-align:left;"></div>
+                        <div id="recommendations-container" style="display:none;margin-top:24px;">
+                            <ol id="recommendations-list" style="font-size:1.1em;"></ol>
+                        </div>
                         <script>
                         document.getElementById('get-recommendations-btn').onclick = function() {
-                            const cacheKey = `recommendations_{{ username }}`;
-                            const cache = localStorage.getItem(cacheKey);
-                            let now = Date.now();
-                            if (cache) {
-                                try {
-                                    const parsed = JSON.parse(cache);
-                                    if (parsed.expiry > now) {
-                                        renderRecommendations(parsed.data);
-                                        return;
-                                    } else {
-                                        localStorage.removeItem(cacheKey);
-                                    }
-                                } catch (e) { localStorage.removeItem(cacheKey); }
-                            }
                             fetch(`/goals/{{ username }}/generate-recommendations/`, {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
@@ -224,32 +258,12 @@
                             })
                             .then(response => response.text())
                             .then(data => {
-                                localStorage.setItem(cacheKey, JSON.stringify({ data: data, expiry: now + 3600 * 1000 }));
-                                renderRecommendations(data);
+                                displayRecommendations(data);
                             })
                             .catch(err => {
                                 document.getElementById('recommendations-output').innerHTML = '<div style="color:#e53e3e;">Failed to fetch recommendations.</div>';
                             });
                         };
-                        function renderRecommendations(data) {
-                            // Remove special characters like ** and * and split into points
-                            let points = data.split(/\n\d+\.|\n- |\n• |\n/).filter(x => x.trim());
-                            let html = '<ol style="background:#f7f8fa;padding:18px 24px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.07);">';
-                            for (let i = 0; i < Math.min(points.length, 5); i++) {
-                                let p = points[i];
-                                let clean = p.replace(/\*\*/g, '').replace(/\*/g, '').trim();
-                                // Bold the action phrase (before the first colon or period)
-                                let match = clean.match(/^([^:.]+[:.])/);
-                                if (match) {
-                                    let bolded = `<strong>${match[1]}</strong>` + clean.slice(match[1].length);
-                                    clean = bolded;
-                                }
-                                let shortP = clean.length > 220 ? clean.slice(0, 220) + '...' : clean;
-                                html += `<li style='margin-bottom:10px;'>${shortP}</li>`;
-                            }
-                            html += '</ol>';
-                            document.getElementById('recommendations-output').innerHTML = html;
-                        }
                         </script>
                     {% else %}
                         <p>No financial goals are set for you.</p>
