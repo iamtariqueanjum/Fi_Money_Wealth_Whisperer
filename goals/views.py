@@ -335,7 +335,13 @@ def generate_recommendations(request, username):
     prompt = (
         "User context (financial facts):\n" + "\n".join(retrieved_chunks) +
         f"\n\nUser query: {user_query}\n" +
-        "\nBased on the above, provide 3-5 short, actionable financial recommendations as a bullet list. Each item should be a single, clear action, not a paragraph."
+        "\nInstructions:\n"
+        "1. Provide 3-5 short, actionable financial recommendations for the user.\n"
+        "2. For each recommendation, add a one-sentence explanation using the user's financial data and the supporting articles above.\n"
+        "Format your response as:\n"
+        "1. [Recommendation 1]\n   - Reason: [Explanation]\n"
+        "2. [Recommendation 2]\n   - Reason: [Explanation]\n"
+        "and so on."
     )
     print(f"\n--- Gemini LLM Prompt ---\n{prompt}\n--- END Prompt ---\n")
 
